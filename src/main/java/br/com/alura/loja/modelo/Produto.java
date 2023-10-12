@@ -18,7 +18,7 @@ public class Produto {
     private String descricao;
     private BigDecimal preco;
     private LocalDate data = LocalDate.now();
-    @Enumerated(EnumType.STRING) //Anotação para indicar o tipo que o enum vai receber na tabela
+    @ManyToOne // Anotação para definir a cardinalidade do relacionamento
     private  Categoria categoria;
 
     public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
