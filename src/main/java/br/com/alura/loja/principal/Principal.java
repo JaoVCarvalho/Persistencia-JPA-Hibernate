@@ -1,6 +1,9 @@
 package br.com.alura.loja.principal;
 
+import br.com.alura.loja.dao.ProdutoDAO;
+import br.com.alura.loja.modelo.Categoria;
 import br.com.alura.loja.modelo.Produto;
+import br.com.alura.loja.util.JPAUtil;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -13,18 +16,13 @@ public class Principal {
 
         // Testando inserção no BD usando JPA
 
-        Produto celular = new Produto();
-        celular.setNome("Motorola Moto Z3");
-        celular.setDescricao("Smartphone da motorola");
-        celular.setPreco(new BigDecimal(1500));
+        Produto celular =
+                new Produto("Motorola Moto Z3", "Smartphone da motorola", new BigDecimal("1500.00"), Categoria.CELULARES);
 
-        // O EntityManagerFactory recebe como parâmetro o nome atribuido ao persistence-unit, para que ele identifique qual BD será utilizado
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-        EntityManager em = factory.createEntityManager();
+        EntityManager em = JPAUtil.getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(celular);
+        new ProdutoDAO(em).salvar(celular);
         em.getTransaction().commit();
         em.clear();
     }

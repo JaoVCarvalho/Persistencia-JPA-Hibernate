@@ -12,7 +12,10 @@
             <property name="javax.persistence.jdbc.password" value="36714746" />
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <!--Comando para mostrar solicitações/query feitas no banco de dados-->
             <property name="hibernate.show_sql" value="true"/>
+            <!--Comando para criar as tabelas de maneira automática-->
+            <!--O valor "update" pode ser alterado por outros, como exemplo, create-->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
