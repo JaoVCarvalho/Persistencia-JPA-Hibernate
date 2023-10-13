@@ -30,6 +30,25 @@ public class Principal {
         new ProdutoDAO(em).salvar(celular);
 
         em.getTransaction().commit();
-        em.clear();
+        em.close();
+
+        em = JPAUtil.getEntityManager();
+        em.getTransaction().begin();
+
+        //Para realizar o Update de uma entidade, basta alterar seus atributos, porém para alterar no BD essa entidade precisa estar no estado Managed
+        //Para garantir que estamos no estado Managed, utilizamos o merge()
+        celular.setPreco(new BigDecimal("1300.00"));
+        new ProdutoDAO(em).atualizar(celular);
+
+        em.getTransaction().commit();
+        em.close();
+
+        em = JPAUtil.getEntityManager();
+        em.getTransaction().begin();
+
+        new ProdutoDAO(em).remover(celular);
+
+        em.getTransaction().commit();
+        em.close();
     }
 }
