@@ -11,10 +11,39 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Principal {
     public static void main(String[] args) {
 
+        //cadastroProduto(); // Testando os estados de inserção, atualização e remoção;
+
+        Produto produto;
+        Long id = 3L;
+
+        EntityManager em = JPAUtil.getEntityManager();
+        produto = new ProdutoDAO(em).buscarPorId(id);
+
+        System.out.println("Produto: " + produto.getNome() + " | Preço: R$ " + produto.getPreco());
+        System.out.println();
+
+        List<Produto> produtos = new ArrayList<>();
+        produtos = new ProdutoDAO(em).buscarTodos();
+
+        produtos.forEach(p -> System.out.println("Produto: " + p.getNome() + " | Preço: R$ " + p.getPreco()));
+
+        produtos = new ProdutoDAO(em).buscarPorNome("Motorola Moto Z3");
+        produtos.forEach(p -> System.out.println("Produto: " + p.getNome()));
+
+        produtos = new ProdutoDAO(em).buscarPorCategoria("CELULARES");
+        produtos.forEach(p -> System.out.println("Produto: " + p.getNome() + " | Categoria: " + p.getCategoria().getNome()));
+
+        BigDecimal preco = new ProdutoDAO(em).buscarPreco("Motorola Moto Z3");
+        System.out.println("Preço: " + preco);
+    }
+
+    private static void cadastroProduto() {
         // Testando inserção no BD usando JPA
 
         Categoria categoria = new Categoria("CELULARES");

@@ -47,4 +47,28 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
 }
